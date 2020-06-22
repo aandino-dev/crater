@@ -13,6 +13,25 @@ variables:
   phpVersion: 7.2
 
 steps:
+- script: |
+    apt-get update && apt-get install -y \
+    git \
+    curl \
+    libpng-dev \
+    libonig-dev \
+    libxml2-dev \
+    zip \
+    unzip \ 
+    libzip-dev \ 
+    libmagickwand-dev
+  displayName: 'Install system dependencies'
+
+- script: apt-get clean && rm -rf /var/lib/apt/lists/*
+  displayName: 'Clear cache'
+
+- script: pecl install imagick
+  displayName: 'pecl install imagick'
+  
 - script: npm install
   displayName: 'npm install'
 
